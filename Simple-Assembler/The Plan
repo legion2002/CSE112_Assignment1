@@ -1,0 +1,61 @@
+//Python
+Simulator -
+8 register -->global ARRAYS of index 16
+
+Assembler -
+2 pass fashion 
+
+1st pass -  Symbol Table
+
+
+2nd pass - Final binary print
+Opcode Table - Srishti
+Note : everything should be in arrays
+Every opcode value will return
+input - query in the form of ( add, mov , sub etc.)
+opcode = {
+    "ins" : [type, opcode]
+    "add" : [A, 00000]
+    
+}
+types {
+   
+    type A : {
+        instruction :[opcode, unused, r1, r2, r3],
+         address: -1;
+    }
+    type A : [opcode, unused, r1, r2, r3]
+    type A : [opcode, unused, r1, r2, r3]
+}
+register {
+    r1 : [0,0,0]
+}
+Functions - 
+
+output - Opcode + optional( type, fields, values of unused bits)
+Symbol Table - Diksha
+In one pass make symbol Table
+Return appropriate memory address
+Labels {
+    
+}
+Variables {
+
+}
+Functions - 
+1) Error Check - if typo or label doesnt exist
+2) var_return - returns variable memory address
+3) 
+
+Main File -  Tanishk
+input system
+symbol table cal
+check if label
+take in instruction 
+segment instruction and call necessary values
+pass it through error check --> tbd
+output system
+
+Error Table - 
+
+
