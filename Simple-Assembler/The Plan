@@ -15,29 +15,27 @@ Every opcode value will return
 input - query in the form of ( add, mov , sub etc.)
 opcode = {
     "ins" : [type, opcode]
-    "add" : [A, 00000]
-    
+    "add" : [A, "00000"]
+        
 }
 types {
    
-    type A : {
-        instruction :[opcode, unused, r1, r2, r3],
-         address: -1;
-    }
+    
     type A : [opcode, unused, r1, r2, r3]
     type A : [opcode, unused, r1, r2, r3]
 }
 register {
-    r1 : [0,0,0]
+    r1 : "000"
+    r2 : "
 }
 Functions - 
 
-output - Opcode + optional( type, fields, values of unused bits)
+output - Opcode + optional(type, fields, values of unused bits)
 Symbol Table - Diksha
 In one pass make symbol Table
 Return appropriate memory address
 Labels {
-    
+    "label_name" : addr
 }
 Variables {
 
@@ -57,5 +55,13 @@ pass it through error check --> tbd
 output system
 
 Error Table - 
+
+//Tanishk Part 
+instructions {
+    add : "Instruction in the form of string"
+    1 : "["var","x"]
+    2 : "add a b c"
+
+}
 
 
