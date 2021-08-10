@@ -1,21 +1,16 @@
-
-
-
-# print("hello this is tanishk")
+import Symbol_Table as st
+#This dictionary contains instructions in the form {instruction_line_number : [list of strings]}
 instructions_file = {}
+
+# This function processes an input line
 def processing(ins, count):
     ls = list(map(str,ins.strip().split()))
     instructions_file[count] = ls
 
-
-    
-
-
-
+#This function takes in the input till EOF
 def inp():
     count = 1
-
-    for i in range(256):
+    while True:
         try:
             line = input()
             processing(line, count)
@@ -24,21 +19,18 @@ def inp():
             break
 
         
-       
-            
-
+#main execution starts here
 def main():
     #first pass across text
     # createSymbol(inst)
     inp() #pass1
-    createSymbol #pass2
-    convertBinary #pass3
+    print(instructions_file)
+    st.createSymbol(instructions_file) #pass2
+    print(st.Variables)
+   # convertBinary #pass3
 
-    createSymbol(instructions_file)
-    for instruction in instructions_file:
-        opcode_fetch(instruction[0],instruction.key)
+    
+    
 
-inp()
-print(instructions_file)
-# a = input()
-# print("This is what I have read" + a)
+main()
+
