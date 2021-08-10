@@ -11,6 +11,8 @@ program_counter = 0
 def createSymbol(instructions_file):
 	global program_counter
 	for instruction in instructions_file.keys():
+		if(not instructions_file[instruction]):
+			continue
 		symbol = instructions_file[instruction][0]
 		if(checkSymbol(symbol) == 1):
 			insertVariable(instructions_file[instruction][1], 0)
@@ -49,4 +51,3 @@ def checkSymbol(symbol_name : str) -> int:
 		return 2
 	else:
 		return 3
-
