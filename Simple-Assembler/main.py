@@ -14,8 +14,8 @@ def inp():
     while True:
         try:
             line = input()
-            if(line != ''):
-                processing(line, count)
+            
+            processing(line, count)
             
             count += 1
         except EOFError:
@@ -24,26 +24,28 @@ def inp():
 
 def converter():
     
-    for address in instructions_file.keys:
+    for address in instructions_file.keys():
         instruction = instructions_file[address]
         converted = ""
-        if(instruction[-1] == ":"):
-            st.processLabel(instruction[0],address)
-        else:
-            onverted = op.processInst(instruction[0], address)
+        if(instruction):
+            if(instruction[-1] == ":"):
+                st.processLabel(instruction[0],address)
+            else:
+                converted = op.processInst(instruction[0], address)
             
 
 
 #main execution starts here
 def main():
-    #first pass across text
-    # createSymbol(inst)
+    
     inp() #pass1
-    print(instructions_file)
-    st.createSymbol(instructions_file) #pass2
-    print(st.Variables)
-    print(st.Label)
-   # convertBinary #pass3
+    st.createSymbol(instructions_file)
+    converter()
+   # BigErrors() #checks generic errors in the whole file like halt
+    #converter() #converts code line by line and checks for line-by-line error
+    
+
+
 
     
 

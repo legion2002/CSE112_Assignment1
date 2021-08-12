@@ -5,4 +5,9 @@ label_check:
 
 add x y z
 
-hlt
+
+add r5 r6 r7
+
+
+
+
