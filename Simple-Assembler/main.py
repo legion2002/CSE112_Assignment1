@@ -13,12 +13,19 @@ def inp():
     while True:
         try:
             line = input()
-            processing(line, count)
+            if(line != ''):
+                processing(line, count)
+            
             count += 1
         except EOFError:
             break
 
-        
+
+def converter():
+    for instruction in instructions_file:
+         instruction[0] 
+
+
 #main execution starts here
 def main():
     #first pass across text
@@ -31,7 +38,7 @@ def main():
    # convertBinary #pass3
 
     
-    
+
 
 main()
 
