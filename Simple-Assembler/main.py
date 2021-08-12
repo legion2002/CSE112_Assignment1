@@ -27,6 +27,7 @@ def main():
     print(instructions_file)
     st.createSymbol(instructions_file) #pass2
     print(st.Variables)
+    print(st.Label)
    # convertBinary #pass3
 
     
