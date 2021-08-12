@@ -1,6 +1,7 @@
 import Symbol_Table as st
 import error as er
 import opcode as op
+import main 
 
 def misuseOfLabelsAndVariables():
 	for variable_name in st.Variables:
@@ -28,7 +29,7 @@ def typoInInstruction(line_number : int):
 
 def VariablesInBetween():
 	flag = 0
-	for instruction in instruction_file:
+	for instruction in main.instructions_file:
 		if(instruction[0] != "var"):
 			flag +=1 
 		elif(instruction[0] == "var" and flag > 0):

@@ -1,7 +1,7 @@
 def processOpcode(instr,address):
     for key in type_opcode.keys():
         if( key == instr):
-            return type_opcode["key"]
+            return type_opcode[key]
     TypoError(address)
 
 def processInst(instr,address):
@@ -23,10 +23,23 @@ def processInst(instr,address):
             processReg()
         elif item == 'mem':
             #somebody make this
-            processMem()
+            # processMem()
         else:
-            GeneralError()
+            # GeneralError()
         return binary
+    
+def processImm(immString):
+    errorCheckImm(imm)
+    n = int(immString[1:])
+    binRep = bin(n).replace("0b", "")
+    while(len(binRep) < 8):
+        binRep = "0" + binRep
+    
+    assert len(binRep) == 8, "something is wrong with the immediate Value"
+    return binRep
+
+def processReg(reg : str, instruction):
+    # errorCheckReg(reg, instruction) --> this function checks for all FLAGS and register related errors
     
 
 type_opcode = {
