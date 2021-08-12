@@ -4,7 +4,7 @@ def processOpcode(instr,address):
             return type_opcode["key"]
     TypoError(address)
 
-def processType(instr,address):
+def processInst(instr,address):
     binary = ''
     opReturn = processOpcode(instr,address)
     type = opReturn[0]
@@ -16,11 +16,17 @@ def processType(instr,address):
         elif item == 'u':
             binary += '0'
         elif item == 'imm':
+            #somebody make this
             processImm()
         elif item == 'reg':
+            #somebody make this
             processReg()
         elif item == 'mem':
+            #somebody make this
             processMem()
+        else:
+            GeneralError()
+        return binary
     
 
 type_opcode = {

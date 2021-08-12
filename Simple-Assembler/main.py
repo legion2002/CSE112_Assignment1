@@ -1,4 +1,5 @@
 import Symbol_Table as st
+import opcode as op
 #This dictionary contains instructions in the form {instruction_line_number : [list of strings]}
 instructions_file = {}
 
@@ -22,8 +23,15 @@ def inp():
 
 
 def converter():
-    for instruction in instructions_file:
-         instruction[0] 
+    
+    for address in instructions_file.keys:
+        instruction = instructions_file[address]
+        converted = ""
+        if(instruction[-1] == ":"):
+            st.processLabel(instruction[0],address)
+        else:
+            onverted = op.processInst(instruction[0], address)
+            
 
 
 #main execution starts here

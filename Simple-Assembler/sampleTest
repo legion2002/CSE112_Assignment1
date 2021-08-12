@@ -2,5 +2,7 @@ var x
 var y
 add a b c
 label_check: 
+
 add x y z
+
 hlt
