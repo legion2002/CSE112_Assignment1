@@ -24,8 +24,10 @@ def processInst(instr,address):
         elif item == 'mem':
             #somebody make this
             # processMem()
+            pass
         else:
-            # GeneralError()
+            #GeneralError()
+            pass
         return binary
     
 def processImm(immString):
@@ -40,6 +42,7 @@ def processImm(immString):
 
 def processReg(reg : str, instruction):
     # errorCheckReg(reg, instruction) --> this function checks for all FLAGS and register related errors
+    pass
     
 
 type_opcode = {
