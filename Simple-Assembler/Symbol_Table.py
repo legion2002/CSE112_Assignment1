@@ -1,4 +1,4 @@
-
+import Errors_functions as er
 # Label dictionary stores labels and its location in the format "abc" : 1
 Label = {}
 
@@ -13,8 +13,17 @@ def createSymbol(instructions_file):
 	for instruction in instructions_file.keys():
 		if(not instructions_file[instruction]):
 			continue
+		if(len(instructions_file[instruction]) == 1):
+			if(instructions_file[instruction][0] == "var"):
+				er.GeneralError(instruction)
+		
+		if(len(instructions_file[instruction] )>2):
+			if(instructions_file[instruction][0] == "var"):
+				er.GeneralError(instruction)
+				
 		symbol = instructions_file[instruction][0]
 		if(checkSymbol(symbol) == 1):
+			# print(instructions_file[instruction])
 			insertVariable(instructions_file[instruction][1], 0)
 		elif(checkSymbol(symbol) == 2):
 			insertLabel(symbol[:-1], program_counter)

@@ -43,7 +43,7 @@ def main():
     inp() 
     
     st.createSymbol(instructions_file)
-    # er.BigErrors()
+    er.BigErrors(instructions_file)
     converter()
   
     

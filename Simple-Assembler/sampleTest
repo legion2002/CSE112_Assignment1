@@ -1,7 +1,2 @@
-var x
-var y
-: add R0 R1 R2
-add R5 R6 R1
-hlt 
-
-
+var abc xyz
+hlt

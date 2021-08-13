@@ -38,16 +38,17 @@ def TypoError(address : int):
 
 def VariablesInBetween(instructions_file):
 	flag = 0
-	for instruction in instructions_file:
-		if(instruction[0] != "var"):
-			flag +=1 
-		elif(instruction[0] == "var" and flag > 0):
-			for key, value in instructions_file.items():
-				if(value == instruction):
-					line_number = key
-					break
-			print(er.error_file["g"] + " in line number :" + str(line_number))
-			exit()
+	for instruction in instructions_file.values():
+		if(instruction):
+			if(instruction[0] != "var"):
+				flag +=1 
+			elif(instruction[0] == "var" and flag > 0):
+				for key, value in instructions_file.items():
+					if(value == instruction):
+						line_number = key
+						break
+				print(er.error_file["g"] + " in line number :" + str(line_number))
+				exit()
 
 
 def GeneralError(address : int):
@@ -100,29 +101,38 @@ def useOfUndefinedVariable(var_name : str, address : int):
 
 
 def BigErrors(instructions_file):
-	misuseOfLabelsAndVariables()
+	halt_error(instructions_file)
 	VariablesInBetween(instructions_file)
-	checkLabelAndVariableNames()
-	halt_error()
+	misuseOfLabelsAndVariables()
+	
+	checkLabelAndVariableNames(instructions_file)
+	
 
 def halt_error(instructions_file):
-    flag = 0
-    for instruction in instructions_file.values():
+	flag = 0
+	for instruction in instructions_file.values():
         
-        if flag == 1 and len(instruction)!= 0:
-            print(er.error_file["i"])
-            exit()
+		if flag == 1 and len(instruction)!= 0:
+			print(er.error_file["i"])
+			exit()
 
-        if len(instruction) == 1 and instruction[0] == "hlt":
-            flag = 1
+		if len(instruction) == 1 and instruction[0] == "hlt":
+			flag = 1
             
-        elif len(instruction) >= 1 and instruction[0] == "hlt":
-            print(er.error_file["k"])
-            exit()
+		elif len(instruction) >= 1 and instruction[0] == "hlt":
+			print(er.error_file["k"])
+			exit()
+		elif len(instruction) >= 1 and instruction[0][-1] == ":":
+			if(len(instruction) == 2 and instruction[1] == "hlt"):
+				flag = 1
+			elif(len(instruction) > 2 and instruction[1] == "hlt"):
+				print(er.error_file["k"])
+				exit()
+
         
-    if flag == 0:
-        print(er.error_file["h"])
-    exit()
+	if flag == 0:
+		print(er.error_file["h"])
+		exit()
 
 
 
