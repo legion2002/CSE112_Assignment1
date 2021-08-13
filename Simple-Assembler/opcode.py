@@ -24,14 +24,16 @@ def processInst(instr,address):
         elif item == 'mem':
             #somebody make this
             # processMem()
+            pass
             
         else:
-            #GeneralError()
+            #GeneralError(address)
+            pass
             
         return binary
     
 def processImm(immString):
-    errorCheckImm(imm)
+    errorCheckImm(imm, address)
     n = int(immString[1:])
     binRep = bin(n).replace("0b", "")
     while(len(binRep) < 8):
@@ -40,11 +42,11 @@ def processImm(immString):
     assert len(binRep) == 8, "something is wrong with the immediate Value"
     return binRep
 
-def processReg(reg : str, instruction):
-    # errorCheckReg(reg, instruction) --> this function checks for all FLAGS and register related errors
+def processReg(reg : str, instruction, address):
+    # errorCheckReg(reg, instruction, address) --> this function checks for all FLAGS and register related errors
  
 
-    errorCheckReg(reg, instruction) 
+    errorCheckReg(reg, instruction, address) 
     for regName in registers.keys():
         if(regName == reg):
             return registers[regName]
