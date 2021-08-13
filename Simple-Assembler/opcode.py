@@ -1,72 +1,8 @@
-import Errors_functions as er
-def processOpcode(instr,address):
-    for key in type_opcode.keys():
-        if( key == instr):
-            return type_opcode[key]
-    er.TypoError(address)
-
-def processInst(instr,address):
-    #received complete instruction as instr
-    binary = ''
-    #getting opcode using instr[0]
-    opReturn = processOpcode(instr[0],address)
-    type = opReturn[0]
-    #this is binary opcode
-    opcode = opReturn[1]
-    base = type_dict[type]
-    wordCount = 0
-    for item in base:      
-
-        if item == 'opcode':
-            print(instr[wordCount])
-            binary += opcode
-        elif item == 'u':
-            wordCount -= 1
-            binary += '0'
-        elif item == 'imm':
-            print(instr[wordCount])
-           
-            processImm(instr[wordCount],address)
-        elif item == 'reg':
-            print(instr[wordCount])
-            processReg(instr[wordCount],instr,address)
-        elif item == 'mem':
-            #somebody make this
-            # processMem()
-            pass
-            
-        else:
-            #GeneralError(address)
-            pass
-        wordCount += 1
-    return binary
-    
-def processImm(immString,address):
-    er.errorCheckImm(imm, address)
-    n = int(immString[1:])
-    binRep = bin(n).replace("0b", "")
-    while(len(binRep) < 8):
-        binRep = "0" + binRep
-    
-    assert len(binRep) == 8, "something is wrong with the immediate Value"
-    return binRep
-
-def processReg(reg : str, instruction, address):
-    # errorCheckReg(reg, instruction, address) --> this function checks for all FLAGS and register related errors
- 
-
-    er.errorCheckReg(reg, instruction, address) 
-    for regName in registers.keys():
-        if(regName == reg):
-            return registers[regName]
-        er.TypoError(address)
-
-    
-
 type_opcode = {
     "add":['A',"00000"],"sub":['A',"00001"],"mov1":['B',"00010"],"mov2":['C',"00011"],"ld":['D',"00100"],"st":['D',"00101"],
     "Mul":['A',"00110"],"div":['C',"00111"],"rs":['B',"01000"],"ls":['B',"01001"],"xor":['A',"01010"],"or":['A',"01011"],"and":['A',"01100"],
-    "not":['C',"01101"],"cmp":['C',"01110"],"jmp":['E',"01111"],"jlt":['E',"10000"],"jgt":['E',"10001"],"je":['E',"10010"],"hlt":['F',"10011"]
+    "not":['C',"01101"],"cmp":['C',"01110"],"jmp":['E',"01111"],"jlt":['E',"10000"],"jgt":['E',"10001"],"je":['E',"10010"],"hlt":['F',"10011"],
+    "mov":['G', "11111"]
 }
 
 type_dict = {
@@ -77,8 +13,16 @@ type_dict = {
     'E' : ["opcode", "u", "u", "u", "mem"],
     'F' : ["opcode", "u", "u", "u", "u", "u", "u", "u", "u", "u", "u", "u" ]
 }
+type_length = {
+    'A' : 4,
+    'B' : 3,
+    'C' : 3,
+    'D' : 3,
+    'E' : 2,
+    'F' : 1
+
+}
 
 registers = {
-    "r0": "000" , "r1": "001" , "r2": "010" , "r3": "011", "r4": "100" , "r5": "101" , "r6": "110" , "FLAGS": "111"
+    "R0": "000" , "R1": "001" , "R2": "010" , "R3": "011", "R4": "100" , "R5": "101" , "R6": "110" , "FLAGS": "111"
 }
-processInst(["add","r1", "r2", "r3"],1)

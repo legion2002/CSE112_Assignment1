@@ -3,6 +3,7 @@ import error as er
 import opcode as op
 
 
+
 def misuseOfLabelsAndVariables():
 	for variable_name in st.Variables:
 		if(variable_name in st.Label):
@@ -31,13 +32,13 @@ def TypoError(address : int):
 	exit()
 
 
-def VariablesInBetween():
+def VariablesInBetween(instructions_file):
 	flag = 0
-	for instruction in main.instructions_file:
+	for instruction in instructions_file:
 		if(instruction[0] != "var"):
 			flag +=1 
 		elif(instruction[0] == "var" and flag > 0):
-			for key, value in main.instructions_file.items():
+			for key, value in instructions_file.items():
 				if(value == instruction):
 					line_number = key
 					break
@@ -61,11 +62,11 @@ def errorCheckReg(reg_name : str, instruction, address : int):
 
 
 
-def checkLabelAndVariableNames():
+def checkLabelAndVariableNames(instructions_file):
 	for label_name in st.Label:
-		if(label_name in op.type_opcode.keys()):
+		if(label_name in op.type_opcode.keys() and label_name != "mov1" and label_name != "mov2"):
 			check_label = label_name + ":"
-			for key, value in main.instructions_file.items():
+			for key, value in instructions_file.items():
 				if(value[0] == check_label):
 					line_number = key
 					break
@@ -73,8 +74,8 @@ def checkLabelAndVariableNames():
 			exit()
 
 	for var_name in st.Variables:
-		if(var_name in op.type_opcode.keys()):
-			for key, value in main.instructions_file.items():
+		if(var_name in op.type_opcode.keys()and var_name != "mov1" and var_name != "mov2"):
+			for key, value in instructions_file.items():
 				if(value[0] == "var" and value[1] == var_name):
 					address = key
 					break
@@ -94,15 +95,15 @@ def useOfUndefinedVariable(var_name : str, address : int):
 		exit()
 
 
-def BigErrors():
+def BigErrors(instructions_file):
 	misuseOfLabelsAndVariables()
-	VariablesInBetween()
+	VariablesInBetween(instructions_file)
 	checkLabelAndVariableNames()
 	halt_error()
 
-def halt_error():
+def halt_error(instructions_file):
     flag = 0
-    for instruction in main.instructions_file.values():
+    for instruction in instructions_file.values():
         
         if flag == 1 and len(instruction)!= 0:
             print(er.error_file["i"])

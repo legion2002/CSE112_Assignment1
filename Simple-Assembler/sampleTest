@@ -1,12 +1,7 @@
 var x
 var y
-add a b c
-label_check: 
-
-add x y z
-
-
-add r5 r6 r7
-hlt xyz
+: add R0 R1 R2
+add R5 R6 R1
+hlt 
 
 
