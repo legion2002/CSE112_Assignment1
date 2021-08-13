@@ -98,6 +98,26 @@ def BigErrors():
 	misuseOfLabelsAndVariables()
 	VariablesInBetween()
 	checkLabelAndVariableNames()
+	halt_error()
+
+def halt_error():
+    flag = 0
+    for instruction in main.instructions_file.values():
+        
+        if flag == 1 and len(instruction)!= 0:
+            print(er.error_file["i"])
+            exit()
+
+        if len(instruction) == 1 and instruction[0] == "hlt":
+            flag = 1
+            
+        elif len(instruction) >= 1 and instruction[0] == "hlt":
+            print(er.error_file["k"])
+            exit()
+        
+    if flag == 0:
+        print(er.error_file["h"])
+    exit()
 
 
 

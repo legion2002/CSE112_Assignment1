@@ -1,13 +1,17 @@
+import Errors_functions as er
 def processOpcode(instr,address):
     for key in type_opcode.keys():
         if( key == instr):
             return type_opcode[key]
-    TypoError(address)
+    er.TypoError(address)
 
 def processInst(instr,address):
+    #received complete instruction as instr
     binary = ''
-    opReturn = processOpcode(instr,address)
+    #getting opcode using instr[0]
+    opReturn = processOpcode(instr[0],address)
     type = opReturn[0]
+    #this is binary opcode
     opcode = opReturn[1]
     base = type_dict[type]
     for item in base:
@@ -16,10 +20,10 @@ def processInst(instr,address):
         elif item == 'u':
             binary += '0'
         elif item == 'imm':
-            #somebody make this
+           
             processImm()
         elif item == 'reg':
-            #somebody make this
+            
             processReg()
         elif item == 'mem':
             #somebody make this
@@ -33,7 +37,7 @@ def processInst(instr,address):
         return binary
     
 def processImm(immString):
-    errorCheckImm(imm, address)
+    er.errorCheckImm(imm, address)
     n = int(immString[1:])
     binRep = bin(n).replace("0b", "")
     while(len(binRep) < 8):
@@ -46,11 +50,11 @@ def processReg(reg : str, instruction, address):
     # errorCheckReg(reg, instruction, address) --> this function checks for all FLAGS and register related errors
  
 
-    errorCheckReg(reg, instruction, address) 
+    er.errorCheckReg(reg, instruction, address) 
     for regName in registers.keys():
         if(regName == reg):
             return registers[regName]
-        TypoError(address)
+        er.TypoError(address)
 
     
 
