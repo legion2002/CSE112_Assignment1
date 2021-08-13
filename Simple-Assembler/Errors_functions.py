@@ -22,9 +22,13 @@ def errorCheckImm(immediate_value : str, address : int):
 	if(immediate_value[0] != "$"):
 		print(er.error_file["k"] + " in line number : " + str(address))
 		exit()
-	if(not(immediate_value >= 0 and immediate_value <= 255)):
-		print(er.error_file["e"] + " in line number : " + str(address))
-		exit()
+	imm_val = immediate_value[1:]
+	if(imm_val.isnumeric()):
+		if(not(int(imm_val) >= 0 and int(imm_val) <= 255)):
+			print(er.error_file["e"] + " in line number : " + str(address))
+			exit()
+	else:
+		GeneralError(address)
 
 
 def TypoError(address : int):

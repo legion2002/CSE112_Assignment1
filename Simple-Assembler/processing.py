@@ -58,7 +58,7 @@ def processInst(instr,address):
                     binary += processReg(instr[wordCount],instr,address)
                 elif item == 'mem':
                 
-                    binary += processMem()
+                    binary += processMem(instr[wordCount],instr,address)
                     
                     
                 else:
