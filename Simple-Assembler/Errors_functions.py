@@ -40,10 +40,15 @@ def GeneralError():
 	print(er.error_file["k"])
 	exit()
 
-def TyposInRegName(reg_name : str):
+def errorCheckReg(reg_name : str, instruction):
 	if(reg_name not in op.registers.keys()):
 		print(er.error_file["a"])
 		exit()
+		
+	if(reg_name == "FLAGS" and instruction[0] != "mov"):
+		print(er.error_file["d"])
+		exit()
+
 
 def checkLabelAndVariableNames():
 	for label_name in st.Label:
