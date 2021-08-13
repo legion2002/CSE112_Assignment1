@@ -1,7 +1,7 @@
 import Symbol_Table as st
 import error as er
 import opcode as op
-import main 
+
 
 def misuseOfLabelsAndVariables():
 	for variable_name in st.Variables:

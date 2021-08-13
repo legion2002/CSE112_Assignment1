@@ -14,17 +14,22 @@ def processInst(instr,address):
     #this is binary opcode
     opcode = opReturn[1]
     base = type_dict[type]
-    for item in base:
+    wordCount = 0
+    for item in base:      
+
         if item == 'opcode':
+            print(instr[wordCount])
             binary += opcode
         elif item == 'u':
+            wordCount -= 1
             binary += '0'
         elif item == 'imm':
+            print(instr[wordCount])
            
-            processImm()
+            processImm(instr[wordCount],address)
         elif item == 'reg':
-            
-            processReg()
+            print(instr[wordCount])
+            processReg(instr[wordCount],instr,address)
         elif item == 'mem':
             #somebody make this
             # processMem()
@@ -33,10 +38,10 @@ def processInst(instr,address):
         else:
             #GeneralError(address)
             pass
-            
-        return binary
+        wordCount += 1
+    return binary
     
-def processImm(immString):
+def processImm(immString,address):
     er.errorCheckImm(imm, address)
     n = int(immString[1:])
     binRep = bin(n).replace("0b", "")
@@ -65,7 +70,7 @@ type_opcode = {
 }
 
 type_dict = {
-    'A' : ["opcode", "u", "u", "reg", "reg"],
+    'A' : ["opcode", "u", "u", "reg", "reg", "reg"],
     'B' : ["opcode", "reg", "imm"],
     'C' : ["opcode", "u", "u", "u", "u", "u", "reg", "reg"],
     'D' : ["opcode", "reg", "mem"],
@@ -76,3 +81,4 @@ type_dict = {
 registers = {
     "r0": "000" , "r1": "001" , "r2": "010" , "r3": "011", "r4": "100" , "r5": "101" , "r6": "110" , "FLAGS": "111"
 }
+processInst(["add","r1", "r2", "r3"],1)
