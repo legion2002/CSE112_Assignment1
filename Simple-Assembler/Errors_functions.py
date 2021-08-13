@@ -2,6 +2,8 @@ import Symbol_Table as st
 import error as er
 import opcode as op
 
+
+
 def misuseOfLabelsAndVariables():
 	for variable_name in st.Variables:
 		if(variable_name in st.Label):
@@ -60,9 +62,9 @@ def errorCheckReg(reg_name : str, instruction, address : int):
 
 
 
-def checkLabelAndVariableNames():
+def checkLabelAndVariableNames(instructions_file):
 	for label_name in st.Label:
-		if(label_name in type_opcode.keys()):
+		if(label_name in op.type_opcode.keys() and label_name != "mov1" and label_name != "mov2"):
 			check_label = label_name + ":"
 			for key, value in instructions_file.items():
 				if(value[0] == check_label):
@@ -72,7 +74,7 @@ def checkLabelAndVariableNames():
 			exit()
 
 	for var_name in st.Variables:
-		if(var_name in type_opcode.keys()):
+		if(var_name in op.type_opcode.keys()and var_name != "mov1" and var_name != "mov2"):
 			for key, value in instructions_file.items():
 				if(value[0] == "var" and value[1] == var_name):
 					address = key
@@ -93,13 +95,13 @@ def useOfUndefinedVariable(var_name : str, address : int):
 		exit()
 
 
-def BigErrors():
+def BigErrors(instructions_file):
 	misuseOfLabelsAndVariables()
-	VariablesInBetween()
+	VariablesInBetween(instructions_file)
 	checkLabelAndVariableNames()
 	halt_error()
 
-def halt_error():
+def halt_error(instructions_file):
     flag = 0
     for instruction in instructions_file.values():
         
@@ -121,10 +123,3 @@ def halt_error():
 
 
 #errorCheckReg("FLAGS", ["add", "FLAGS", "FLAGS", "r1"], 5)
-
-
-
-
-
-
-

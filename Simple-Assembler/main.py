@@ -1,6 +1,7 @@
 import Symbol_Table as st
 import opcode as op
-import halt 
+import Errors_functions as er 
+import processing as ps
 #This dictionary contains instructions in the form {instruction_line_number : [list of strings]}
 instructions_file = {}
 
@@ -29,22 +30,23 @@ def converter():
         instruction = instructions_file[address]
         converted = ""
         if(instruction):
-            if(instruction[-1] == ":"):
-                st.processLabel(instruction[0],address)
+            if(instruction[0][-1] == ":"):
+                converted = ps.processLabel(instruction,address)
             else:
-                converted = op.processInst(instruction, address)
-            
+                converted = ps.processInst(instruction,address)
+            print(converted) 
 
 
 #main execution starts here
 def main():
     
-    inp() #pass1
+    inp() 
+    
     st.createSymbol(instructions_file)
-    halt.halt_error(instructions_file)
-    # converter()
-   # BigErrors() #checks generic errors in the whole file like halt
-    #converter() #converts code line by line and checks for line-by-line error
+    # er.BigErrors()
+    converter()
+  
+    
     
 
 
