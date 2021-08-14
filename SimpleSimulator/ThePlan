@@ -30,4 +30,4 @@ helper.py -
     set_overflow()
     binary2decimal()
     decimal2binary()
-    getNDigits() --> gives range of digits from binary string
+    getDigits(a,b) --> gives range of digits from binary string (a and b)

@@ -1,25 +1,34 @@
-import helper as hp
-import Opcode_Table as op
-R0 = [0]*16
-R1 = [0]*16
-R2 = [0]*16
-R3 = [0]*16
-R4 = [0]*16
-R5 = [0]*16
-R6 = [0]*16
-FLAGS = [0]*16
-PC = -1
-MEM = "this is memory"
+import Helper as hp
+import Register_File as rf
+import Memory as mem
+import Processing as ps
+
+PC = 0
 
 def input():
-    pass
+    count = 0
+    while True:
+        try:
+            line = input()
+            
+            mem.setMemoryInt(count, line)
+            
+            count += 1
+        except EOFError:
+            break
+        
+def output():
+    print(hp.convertBinary8(PC) + " "*8)
+    for register in rf.Register_Table.values():
+        print(hp.convertIntList2String(register) + " "*8)
 
 def main():
+    input()
     global PC
     while True:
-        PC += 1
-        instruction = input()
-        opcode = hp.getDigits(instruction,0,5)
-        op.callOpcode(opcode)
+        instruction = mem.getMemoryInt(PC)
+        ps.process(instruction, PC)
+        
+        
     
 
