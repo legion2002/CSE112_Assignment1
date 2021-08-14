@@ -57,13 +57,15 @@ def GeneralError(address : int):
 
 
 def errorCheckReg(reg_name : str, instruction, address : int):
+	if(reg_name == "FLAGS" and instruction[0] != "mov"):
+		print(er.error_file["d"] + " in line number : " + str(address))
+		exit()
+
 	if(reg_name not in op.registers.keys()):
 		print(er.error_file["a"] + " in line number : " + str(address))
 		exit()
 		
-	if(reg_name == "FLAGS" and instruction[0] != "mov"):
-		print(er.error_file["d"] + " in line number : " + str(address))
-		exit()
+	
 
 
 
