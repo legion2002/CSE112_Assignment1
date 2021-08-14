@@ -56,6 +56,11 @@ def GeneralError(address : int):
 	exit()
 
 
+def WrongSyntax(address : int):
+	print(er.error_file["j"] + " in line number :" + str(address))
+	exit()
+
+
 def errorCheckReg(reg_name : str, instruction, address : int):
 	if(reg_name not in op.registers.keys()):
 		print(er.error_file["a"] + " in line number : " + str(address))
