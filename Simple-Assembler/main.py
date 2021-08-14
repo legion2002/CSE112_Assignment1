@@ -34,7 +34,8 @@ def converter():
                 converted = ps.processLabel(instruction,address)
             else:
                 converted = ps.processInst(instruction,address)
-            print(converted) 
+            if(converted != ""):
+                print(converted) 
 
 
 #main execution starts here

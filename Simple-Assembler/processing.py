@@ -9,14 +9,17 @@ def processLabel(instruction,address):
 def processOpcode(first,instruction,address):
     if(first == "mov"):
         if(len(instruction) != 3):
-            er.GeneralError
+            er.WrongSyntax(address)
         else:
             regCheck = instruction[2]
             for regName in op.registers.keys():
 
                 if(regName == regCheck):
                     return op.type_opcode["mov2"]
-            return op.type_opcode["mov1"]
+            if(regCheck[0] == '$'):
+                return op.type_opcode["mov1"]
+            else:
+                er.TypoError(address)
 
             
     for key in op.type_opcode.keys():
@@ -62,6 +65,7 @@ def processInst(instr,address):
                     
                     
                 else:
+                
                     er.GeneralError(address)
                     
                 wordCount += 1
@@ -80,8 +84,6 @@ def processImm(immString, address):
     return binRep
 
 def processReg(reg : str, instruction, address):
-
-    # errorCheckReg(reg, instruction, address) --> this function checks for all FLAGS and register related errors
    
     er.errorCheckReg(reg, instruction, address) 
     for regName in op.registers.keys():

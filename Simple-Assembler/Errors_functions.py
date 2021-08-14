@@ -28,7 +28,8 @@ def errorCheckImm(immediate_value : str, address : int):
 			print(er.error_file["e"] + " in line number : " + str(address))
 			exit()
 	else:
-		GeneralError(address)
+		print(er.error_file["e"] + " in line number : " + str(address))
+		exit()
 
 
 def TypoError(address : int):
@@ -63,6 +64,11 @@ def WrongSyntax(address : int):
 
 def errorCheckReg(reg_name : str, instruction, address : int):
 	if(reg_name == "FLAGS" and instruction[0] != "mov"):
+
+		print(er.error_file["d"] + " in line number : " + str(address))
+		exit()
+	
+	if(reg_name == "FLAGS" and instruction[0] == "mov" and instruction[1] == "FLAGS"):
 		print(er.error_file["d"] + " in line number : " + str(address))
 		exit()
 
@@ -126,10 +132,11 @@ def BigErrors(instructions_file):
 
 def halt_error(instructions_file):
 	flag = 0
-	for instruction in instructions_file.values():
-        
+	for instrComplete in instructions_file.items():
+		instruction = instrComplete[1]
+		address = instrComplete[0]
 		if flag == 1 and len(instruction)!= 0:
-			print(er.error_file["i"])
+			print(er.error_file["i"] + " in line number: " + str(address - 1))
 			exit()
 
 		if len(instruction) == 1 and instruction[0] == "hlt":
