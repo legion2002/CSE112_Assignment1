@@ -1,2 +1,4 @@
-var abc xyz
+var xyz
+add R1 R2 R3
+je xyza
 hlt

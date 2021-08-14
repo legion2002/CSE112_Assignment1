@@ -96,15 +96,24 @@ def checkLabelAndVariableNames(instructions_file):
 
 
 def useOfUndefinedLabel(label_name : str, address : int):
+	
 	if(label_name not in st.Label):
-		print(er.error_file["c"]  + " in line number : " + str(address))
-		exit()
+		if(label_name in st.Variables):
+			print(er.error_file["f"]  + " in line number : " + str(address))
+			exit()
+		else:
+			print(er.error_file["c"]  + " in line number : " + str(address))
+			exit()
 
 
 def useOfUndefinedVariable(var_name : str, address : int):
 	if(var_name not in st.Variables):
-		print(er.error_file["b"]  + " in line number : " + str(address))
-		exit()
+		if(var_name in st.Label):
+			print(er.error_file["f"]  + " in line number : " + str(address))
+			exit()
+		else:
+			print(er.error_file["b"]  + " in line number : " + str(address))
+			exit()
 
 
 def BigErrors(instructions_file):
