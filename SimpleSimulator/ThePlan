@@ -1,0 +1,33 @@
+#input -->
+take in binary one-by-one
+each binary is 16 bit 
+take input till EOF (Process only till halt 1001100000000000)
+
+#processing -->
+hardware components - 
+8 registers (16 Bits)  - each in form of an array 
+program counter (8 Bits)
+
+after every line execution - refresh function to update relevant registers.
+
+seperate functions for each opcode -
+add():
+
+#output -->
+
+#File Structure -->
+main.py
+processing.py
+opcode table inverted  - Opcode : "function_name"
+{
+    00000 : add()
+    00001 : sub()
+}
+helper.py - 
+    refresh()
+    output()
+    flag_handling()
+    set_overflow()
+    binary2decimal()
+    decimal2binary()
+    getNDigits() --> gives range of digits from binary string
