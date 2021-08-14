@@ -56,6 +56,11 @@ def GeneralError(address : int):
 	exit()
 
 
+def WrongSyntax(address : int):
+	print(er.error_file["j"] + " in line number :" + str(address))
+	exit()
+
+
 def errorCheckReg(reg_name : str, instruction, address : int):
 	if(reg_name == "FLAGS" and instruction[0] != "mov"):
 		print(er.error_file["d"] + " in line number : " + str(address))
@@ -71,7 +76,7 @@ def errorCheckReg(reg_name : str, instruction, address : int):
 
 def checkLabelAndVariableNames(instructions_file):
 	for label_name in st.Label:
-		if(label_name in op.type_opcode.keys() and label_name != "mov1" and label_name != "mov2"):
+		if((label_name in op.type_opcode.keys() and label_name != "mov1" and label_name != "mov2") or label_name in op.registers.keys()):
 			check_label = label_name + ":"
 			for key, value in instructions_file.items():
 				if(value[0] == check_label):
@@ -81,7 +86,7 @@ def checkLabelAndVariableNames(instructions_file):
 			exit()
 
 	for var_name in st.Variables:
-		if(var_name in op.type_opcode.keys()and var_name != "mov1" and var_name != "mov2"):
+		if((var_name in op.type_opcode.keys()and var_name != "mov1" and var_name != "mov2")or var_name in op.registers.keys() or var_name.isnumeric()):
 			for key, value in instructions_file.items():
 				if(value[0] == "var" and value[1] == var_name):
 					address = key

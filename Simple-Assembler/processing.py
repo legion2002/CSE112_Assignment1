@@ -38,7 +38,7 @@ def processInst(instr,address):
         opcode = opReturn[1]
         base = op.type_dict[type]
         if(op.type_length[type] != len(instr)):
-            er.GeneralError(address)
+            er.WrongSyntax(address)
         else:
             wordCount = 0
             for item in base:      
