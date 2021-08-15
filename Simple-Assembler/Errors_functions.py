@@ -4,17 +4,23 @@ import opcode as op
 
 
 
-def misuseOfLabelsAndVariables():
+def misuseOfLabelsAndVariables(instructions_file):
 	for variable_name in st.Variables:
 		if(variable_name in st.Label):
 			#check line num
-			print(er.error_file["f"])
+			for key, value in instructions_file.items():
+				if(len(value) > 0 and (variable_name + ":") == value[0]):
+					line_num = key
+			print(er.error_file["f"] + " in line number :" + str(line_num))
 			exit()
 
 	for label_name in st.Label:
 		if(label_name in st.Variables):
 			#check line num
-			print(er.error_file["f"])
+			for key, value in instructions_file.items():
+				if(len(value) > 0 and (label_name + ":") == value[0]):
+					line_num = key
+			print(er.error_file["f"] + " in line number :" + str(line_num))
 			exit()
 
 
@@ -125,7 +131,7 @@ def useOfUndefinedVariable(var_name : str, address : int):
 def BigErrors(instructions_file):
 	halt_error(instructions_file)
 	VariablesInBetween(instructions_file)
-	misuseOfLabelsAndVariables()
+	misuseOfLabelsAndVariables(instructions_file)
 	
 	checkLabelAndVariableNames(instructions_file)
 	
