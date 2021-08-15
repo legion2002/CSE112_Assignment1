@@ -1,4 +1,4 @@
-g: jmp a
-a: jmp g 
-jmp g
+var xyz
+add R0 R1 R2
 hlt
+

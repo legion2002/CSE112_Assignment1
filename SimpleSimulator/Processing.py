@@ -5,9 +5,9 @@ import Memory as mem
 def process(instruction : str, PC):
     opcode = instruction[0:5]
     if opcode == "00000":
-        add(instruction, PC)
+        return add(instruction, PC)
     elif opcode == "10011":
-        halt(instruction, PC)
+        return halt(instruction, PC)
     #Complete all elif with proper opcodes, as you keep making your functions
 
 

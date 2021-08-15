@@ -27,7 +27,7 @@ def main():
     global PC
     while True:
         instruction = mem.getMemoryInt(PC)
-        ps.process(instruction, PC)
+        PC = ps.process(instruction, PC)
         
         
     
