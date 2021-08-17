@@ -1,5 +1,4 @@
-
-
+import Helper as hp
 
 MEM = [[0]*16]*256
 
@@ -19,11 +18,14 @@ def getMemoryBin(address : str):
 def getMemoryInt(address : int):
     #gets using integer address
     assert 0 <= address < 256, "Invalid memory address"
-    return str(MEM(address))
+    return hp.convertIntList2String(MEM[address])
 
 def setMemoryInt(address : int, value : str):
+   
     assert address < 256, "Invalid memory address"
+    
     MEM[address] = list(value)
+    
 
 def dumpMemory():
     for row in MEM:

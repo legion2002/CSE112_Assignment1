@@ -5,30 +5,47 @@ import Processing as ps
 
 PC = 0
 
-def input():
+def inp():
     count = 0
     while True:
         try:
-            line = input()
+            
+            line = input().strip()
+            
+            
             
             mem.setMemoryInt(count, line)
             
             count += 1
         except EOFError:
             break
+    
         
-def output():
-    print(hp.convertBinary8(PC) + " "*8)
+def output(PC):
+        
+    print(hp.convertBinary8(PC) , end = " "*8)
     for register in rf.Register_Table.values():
-        print(hp.convertIntList2String(register) + " "*8)
+        print(hp.convertIntList2String(register) , end = " "*8)
+    print()
+
+def refresh(instruction):
+    opcode = instruction[0:5]
+    if opcode == "10001" or opcode == "10000" or opcode == '10010' :
+        return
+    else:
+        rf.setRegList("111", [0]*16)
+        
 
 def main():
-    input()
+    inp()
     global PC
     while True:
+        
         instruction = mem.getMemoryInt(PC)
+        refresh(instruction)
         PC = ps.process(instruction, PC)
+        output(PC)
         
         
-    
+main()
 
