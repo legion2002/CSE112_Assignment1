@@ -1,3 +1,4 @@
+from typing import List
 import Helper as hp
 
 R0 = [0]*16
@@ -28,6 +29,8 @@ def changeArrayRegister( regCode : str, value):
     global R5
     global R6
     global FLAGS
+    assert len(value) == 16, "Something wrong with Register File Length"
+    # assert type(value) is List, "Something wrong with Register File Type"
     if(regCode == '000'):
         R0 = value
         Register_Table[regCode] = R0
@@ -86,9 +89,18 @@ def setRegInt(regCode : str, value : int):
 
 def setOverflow(val : int):
     FLAGS[-4] = val
+    Register_Table["111"] = FLAGS
 
-def testRegister():
-    print("R1" ,  R1)
-    print("flag " , FLAGS)
-    print("flag dictionary", Register_Table["111"])
+def setGreater(val : int):
+    FLAGS[-2] = val
+    Register_Table['111'] = FLAGS
+
+def setLower(val : int):
+    FLAGS[-3] = val
+    Register_Table["111"] = FLAGS
+
+def setEqual(val : int):
+    FLAGS[-1] = val
+    Register_Table["111"] = FLAGS
+
 
