@@ -18,7 +18,8 @@ def subtraction(instruction, PC):
 		rf.setOverflow(1)
 
 	rf.setRegString(reg1, hp.convertBinary16(result))
-
+	
+	
 	return (PC + 1)
 
 
@@ -53,6 +54,8 @@ def bitwise_and(instruction, PC):
 		result.append(int(int(operand1) and int(operand2)))
 
 	rf.setRegList(reg1, result)
+
+
 
 
 

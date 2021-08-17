@@ -21,8 +21,8 @@ def add(instruction, PC):
     reg2 = instruction[10: 13]
     reg3 = instruction[13: 16]
     print(reg1, reg2, reg3)
-    rf.setRegInt(reg2, 65000)
-    rf.setRegInt(reg3,537) #Use this kind of functions to set registers to some value and check your function
+    rf.setRegInt(reg2, 5)
+    rf.setRegInt(reg3,6) #Use this kind of functions to set registers to some value and check your function
     a = hp.convertReg2int(rf.getReg(reg2))
     b = hp.convertReg2int(rf.getReg(reg3))
     
@@ -46,4 +46,5 @@ def halt(instruction, PC):
     exit()
 
 print(process("0000000001010011",5))
+
     
