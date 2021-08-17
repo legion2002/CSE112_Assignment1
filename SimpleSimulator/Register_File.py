@@ -19,29 +19,76 @@ Register_Table  = {
     '110': R6,
     '111': FLAGS,
 }
+def changeArrayRegister( regCode : str, value):
+    global R0
+    global R1
+    global R2
+    global R3
+    global R4
+    global R5
+    global R6
+    global FLAGS
+    if(regCode == '000'):
+        R0 = value
+        Register_Table[regCode] = R0
+    elif (regCode == '001'):
+        R1 = value
+        Register_Table[regCode] = R1
+    elif (regCode == '010'):
+        R2 = value
+        Register_Table[regCode] = R2
+    elif (regCode == '011'):
+        R3 = value
+        Register_Table[regCode] = R3
+    elif (regCode == '100'):
+        R4 = value
+        Register_Table[regCode] = R4
+    elif (regCode == '101'):
+        R5 = value
+        Register_Table[regCode] = R5
+    elif (regCode == '110'):
+        R6 = value
+        Register_Table[regCode] = R6
+    elif (regCode == '111'):
+        FLAGS = value
+        Register_Table[regCode] = FLAGS
+    else:
+        print("There is some error in changeArrayRegister")
+
+
 def getReg(regCode : str):
     assert regCode in Register_Table.keys(), "Registers Invalid"
+    
     return Register_Table[regCode]
 
 def setRegList(regCode : str, value):
     #value is an array of length 16
+    
     assert regCode in Register_Table.keys(), "Registers Invalid"
     assert len(value) == 16, "Registers Invalid"
-    Register_Table[regCode] = value
+    changeArrayRegister(regCode, value)
 
 def setRegString(regCode : str, value : str):
     #value is a string of length 16
-    valueList = list(value)
+    valueList = hp.convertString2IntList(value)
     assert regCode in Register_Table.keys(), "Registers Invalid"
     assert len(valueList) == 16, "Registers Invalid"
-    Register_Table[regCode] = valueList
+    changeArrayRegister(regCode, valueList)
 
 def setRegInt(regCode : str, value : int):
     #value is an integer
-    valueList = hp.convertBinary16(value)
+    
+    valueString = hp.convertBinary16(value)
+    valueList = hp.convertString2IntList(valueString)
     assert regCode in Register_Table.keys(), "Registers Invalid"
     assert len(valueList) == 16, "Registers Invalid"
-    Register_Table[regCode] = valueList
+    changeArrayRegister(regCode, valueList)
 
 def setOverflow(val : int):
     FLAGS[-4] = val
+
+def testRegister():
+    print("R1" ,  R1)
+    print("flag " , FLAGS)
+    print("flag dictionary", Register_Table["111"])
+

@@ -31,7 +31,9 @@ def convertReg2int(regList):
     # returns the value of the register as an integer
     return int("".join(map(str,regList )),2)
 
+def convertString2IntList(stringVal):
 
+    return list(map(int, list(stringVal)))
     
 
 
