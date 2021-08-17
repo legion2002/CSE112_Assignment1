@@ -1,5 +1,6 @@
 import Register_File as rf 
 import Helper as hp
+import Memory as mem
 
 def add(instruction, PC):
     reg1 = instruction[7: 10]
@@ -232,19 +233,3 @@ def compare(instruction, PC):
 		rf.setLower(1)
 	
 	return (PC + 1)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
