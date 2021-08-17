@@ -33,18 +33,22 @@ def process(instruction : str, PC):
         return f.bitwise_and(instruction, PC)
     elif opcode == "01101":
         return f.invert(instruction, PC)
-    elif opcode == "01000":
+    elif opcode == "01110":
         return f.compare(instruction, PC)
+    elif opcode == "01111":
+        return f.unconditional_jump(instruction, PC)
+    elif opcode == "10000":
+        return f.small_jump(instruction, PC)
+    elif opcode == "10001":
+        return f.greater_jump(instruction, PC)
+    elif opcode == "10010":
+        return f.equal_jump(instruction, PC)
     elif opcode == "10011":
         return halt(instruction, PC)
-    #Complete all elif with proper opcodes, as you keep making your functions
-
 
 # start completing processing functions here, if your function doesn't update the program counter,
 # add 1 to the program counter once you have processed your instruction
 # basically it is the responsibility of your function to return the value of the correct program counter.
-
-# add function is completed , refer to this
 
 def halt(instruction, PC):
     print(hp.convertBinary8(PC) + " "*8)
