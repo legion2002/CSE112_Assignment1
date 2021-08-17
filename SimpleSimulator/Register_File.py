@@ -42,3 +42,6 @@ def setRegInt(regCode : str, value : int):
     assert regCode in Register_Table.keys(), "Registers Invalid"
     assert len(valueList) == 16, "Registers Invalid"
     Register_Table[regCode] = valueList
+
+def setOverflow(val : int):
+    FLAGS[-4] = val

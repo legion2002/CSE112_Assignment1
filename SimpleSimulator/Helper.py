@@ -16,6 +16,9 @@ def convertBinary16(value):
     assert len(binRep) == 16, "something is wrong with the memory Value"
     return binRep
 
+def convertBinary(value):
+    return bin(value).replace("0b", "")
+
 def convertIntList2String(listInteger):
     #returns the value of a list of integers to a string (Use to read register)
     return "".join(map(str,listInteger ))
@@ -27,5 +30,8 @@ def convertString2int(stringValue):
 def convertReg2int(regList):
     # returns the value of the register as an integer
     return int("".join(map(str,regList )),2)
+
+
+    
 
 

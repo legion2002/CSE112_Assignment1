@@ -1,4 +1,13 @@
-var xyz
-add R0 R1 R2
+var a
+mov R1      $13
+sub R0 R0 R4
+jmp g
+mov R1 R4
+mul R4 R6 R5
+div R3 R5
+xor R1 R2                       R4
+label: rs R5 $12
+a: ls R4 $13
+or R4 R6 R2
+jmp R1
 hlt
-
