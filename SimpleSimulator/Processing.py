@@ -45,10 +45,8 @@ def halt(instruction, PC):
     mem.dumpMemory()
     exit()
 
-# print(len(rf.Register_Table["001"]))
-print(process("0000000001010011",5))
 
-print(rf.R1)
-print(rf.R2)
-print(rf.R3)
+# print(process("0000000001010011",5))
+
+
 
