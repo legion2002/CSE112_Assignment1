@@ -1,4 +1,3 @@
-from typing import List
 import Helper as hp
 
 R0 = [0]*16
@@ -103,4 +102,14 @@ def setEqual(val : int):
     FLAGS[-1] = val
     Register_Table["111"] = FLAGS
 
+def getOverflow():
+    return FLAGS[-4]
 
+def getGreater():
+    return FLAGS[-2]
+
+def getLower():
+    return FLAGS[-3]
+
+def getEqual():
+    return FLAGS[-1]

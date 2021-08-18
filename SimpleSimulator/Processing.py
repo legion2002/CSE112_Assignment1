@@ -6,7 +6,7 @@ import Memory as mem
 def process(instruction : str, PC):
     opcode = instruction[0:5]
     if opcode == "00000":
-        return f.add(instruction, PC)
+        return add(instruction, PC)
     elif opcode == "00001":
         return f.subtraction(instruction, PC)
     elif opcode == "00010":
@@ -70,9 +70,11 @@ def add(instruction, PC):
     return PC + 1
 
 def halt(instruction, PC):
-    print(hp.convertBinary8(PC) + " "*8)
-    for register in rf.Register_Table.values():
-        print(hp.convertIntList2String(register) + " "*8)
+    
+    # print(hp.convertBinary8(PC), end = " ")
+    # for register in rf.Register_Table.values():
+    #     print(hp.convertIntList2String(register),end = " ")
+    # print()
     mem.dumpMemory()
     exit()
 
