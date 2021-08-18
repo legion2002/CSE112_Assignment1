@@ -44,8 +44,7 @@ def subtraction(instruction, PC):
 
 	rf.setRegString(reg1, hp.convertBinary16(result))
 	
-	
-	return (PC + 1)
+	return PC + 1
 
 
 def move_immediate(instruction, PC):
@@ -58,7 +57,7 @@ def move_immediate(instruction, PC):
 	
 	rf.setRegString(reg1, bin_rep)
 
-	return (PC + 1)
+	return PC + 1
 
 
 def move_register(instruction, PC):
@@ -68,7 +67,7 @@ def move_register(instruction, PC):
 	reg_value = rf.getReg(reg2)
 	rf.setRegString(reg1, reg_value)
 
-	return (PC + 1)
+	return PC + 1
 
 
 def load(instruction, PC):
@@ -79,6 +78,17 @@ def load(instruction, PC):
 	mem_value = mem.getMemoryBin(memory)
 	value = hp.convertString2int(mem_value)
 	rf.setRegInt(reg, value)
+
+	return PC + 1
+
+
+def store(instruction, PC):
+	reg = instruction[5:8]
+	mem_add = instruction[8:]
+	rf.setRegInt(reg, 12)
+	reg_val = rf.getReg(reg)
+	bin_rep_reg = hp.convertIntList2String(reg_val)
+	mem.setMemoryBin(mem_add, bin_rep_reg)
 
 	return PC + 1
 
@@ -139,7 +149,7 @@ def right_shift(instruction, PC):
 	bin_rep = hp.convertBinary16(right_shifted)
 	rf.setRegString(reg1, bin_rep)
 
-	return (PC + 1)
+	return PC + 1
 
 
 def left_shift(instruction, PC):
@@ -153,7 +163,7 @@ def left_shift(instruction, PC):
 	bin_rep = hp.convertBinary16(left_shifted)
 	rf.setRegString(reg1, bin_rep)
 
-	return (PC + 1)
+	return PC + 1
 
 
 def Exclusive_or(instruction, PC):
@@ -172,7 +182,7 @@ def Exclusive_or(instruction, PC):
 
 	rf.setRegString(reg1, bin_rep)
 
-	return (PC + 1)
+	return PC + 1
 
 
 def bitwise_or(instruction, PC):
@@ -193,7 +203,7 @@ def bitwise_or(instruction, PC):
 
 	rf.setRegList(reg1, result)
 
-	return (PC + 1)
+	return PC + 1
 
 
 def bitwise_and(instruction, PC):
@@ -214,7 +224,7 @@ def bitwise_and(instruction, PC):
 
 	rf.setRegList(reg1, result)
 
-	return (PC + 1)
+	return PC + 1
 
 
 def invert(instruction, PC):
@@ -231,7 +241,7 @@ def invert(instruction, PC):
 
 	rf.setRegString(reg1, bin_rep)
 
-	return (PC + 1)
+	return PC + 1
 
 
 def compare(instruction, PC):
@@ -251,7 +261,14 @@ def compare(instruction, PC):
 	else:
 		rf.setLower(1)
 	
-	return (PC + 1)
+	return PC + 1
+
+
+def unconditional_jump(instruction, PC):
+	mem_add = instruction[8:]
+	PC = hp.convertString2int(mem_add)
+
+	return PC
 
 
 def small_jump(instructions,PC):
@@ -262,6 +279,7 @@ def small_jump(instructions,PC):
 		PC = mem_add
 	else:
 		PC = PC +1
+
 	return PC
 
 
@@ -273,12 +291,9 @@ def greater_jump(instructions,PC):
 		PC = mem_add
 	else:
 		PC = PC +1
+
 	return PC
 
-def unconditional_jump(instruction, PC):
-	mem_add = instruction[8:]
-	PC = hp.convertString2int(mem_add)
-	return PC
 
 def equal_jump(instruction, PC):
 	#rf.setRegInt("111",1)
@@ -292,23 +307,11 @@ def equal_jump(instruction, PC):
 
 	return PC
 
-def store(instruction, PC):
-	reg = instruction[5:8]
-	mem_add = instruction[8:]
-	rf.setRegInt(reg, 12)
-	reg_val = rf.getReg(reg)
-	bin_rep_reg = hp.convertIntList2String(reg_val)
-	mem.setMemoryBin(mem_add, bin_rep_reg)
-	return (PC + 1)
-
-
-
-
 
 def halt(instruction, PC):
-    print(hp.convertBinary8(PC) + " "*8)
-    for register in rf.Register_Table.values():
-        print(hp.convertIntList2String(register) + " "*8)
+    # print(hp.convertBinary8(PC) + " "*8)
+    # for register in rf.Register_Table.values():
+    #     print(hp.convertIntList2String(register) + " "*8)
     mem.dumpMemory()
     exit()
 
