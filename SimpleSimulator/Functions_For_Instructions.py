@@ -61,8 +61,8 @@ def move_immediate(instruction, PC):
 	return (PC + 1)
 
 def move_register(instruction, PC):
-	reg1 = instruction[10:14]
-	reg2 = instruction[14:]
+	reg1 = instruction[10:13]
+	reg2 = instruction[13:]
 
 	reg_value = rf.getReg(reg2)
 	rf.setRegString(reg1, reg_value)
@@ -216,8 +216,8 @@ def invert(instruction, PC):
 	return (PC + 1)
 
 def compare(instruction, PC):
-	reg1 = instruction[10:14]
-	reg2 = instruction[14:]
+	reg1 = instruction[10:13]
+	reg2 = instruction[13:]
 
 	#rf.setRegInt(reg2, 5)
 	#rf.setRegInt(reg3,9)
