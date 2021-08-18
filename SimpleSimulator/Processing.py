@@ -55,21 +55,11 @@ def add(instruction, PC):
     reg1 = instruction[7: 10]
     reg2 = instruction[10: 13]
     reg3 = instruction[13: 16]
-
-    
-    # rf.setRegInt(reg2, 5)
-    # rf.setRegInt(reg3,6) #Use this kind of functions to set registers to some value and check your function
-
- 
-    # rf.setRegInt(reg2, 15)
-    # rf.setRegInt(reg3,15) #Use this kind of functions to set registers to some value and check your function
-
     a = hp.convertReg2int(rf.getReg(reg2))
     b = hp.convertReg2int(rf.getReg(reg3))
     
     ans  = a + b
-    ansBin = hp.convertBinary(ans)
-   
+    ansBin = hp.convertBinary(ans)   
     if len(ansBin) > 16:
         rf.setOverflow(1)
         rf.setRegString(reg1, ansBin[len(ansBin) - 16:])
