@@ -286,7 +286,7 @@ def small_jump(instructions,PC):
 def greater_jump(instructions,PC):
 	memory = instructions[8:]
 	mem_add = hp.convertString2int(memory)
-	greater_than_flag = rf.getReg("111")[13]
+	greater_than_flag = rf.getReg("111")[14]
 	if greater_than_flag == 1:
 		PC = mem_add
 	else:
