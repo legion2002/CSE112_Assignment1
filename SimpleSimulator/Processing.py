@@ -6,7 +6,7 @@ import Memory as mem
 def process(instruction : str, PC):
     opcode = instruction[0:5]
     if opcode == "00000":
-        return f.add(instruction, PC)
+        return add(instruction, PC)
     elif opcode == "00001":
         return f.subtraction(instruction, PC)
     elif opcode == "00010":
@@ -55,21 +55,11 @@ def add(instruction, PC):
     reg1 = instruction[7: 10]
     reg2 = instruction[10: 13]
     reg3 = instruction[13: 16]
-
-    
-    # rf.setRegInt(reg2, 5)
-    # rf.setRegInt(reg3,6) #Use this kind of functions to set registers to some value and check your function
-
- 
-    # rf.setRegInt(reg2, 15)
-    # rf.setRegInt(reg3,15) #Use this kind of functions to set registers to some value and check your function
-
     a = hp.convertReg2int(rf.getReg(reg2))
     b = hp.convertReg2int(rf.getReg(reg3))
     
     ans  = a + b
-    ansBin = hp.convertBinary(ans)
-   
+    ansBin = hp.convertBinary(ans)   
     if len(ansBin) > 16:
         rf.setOverflow(1)
         rf.setRegString(reg1, ansBin[len(ansBin) - 16:])
@@ -80,9 +70,11 @@ def add(instruction, PC):
     return PC + 1
 
 def halt(instruction, PC):
-    print(hp.convertBinary8(PC) + " "*8)
-    for register in rf.Register_Table.values():
-        print(hp.convertIntList2String(register) + " "*8)
+    
+    # print(hp.convertBinary8(PC), end = " ")
+    # for register in rf.Register_Table.values():
+    #     print(hp.convertIntList2String(register),end = " ")
+    # print()
     mem.dumpMemory()
     exit()
 
