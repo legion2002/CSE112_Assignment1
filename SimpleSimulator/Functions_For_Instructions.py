@@ -96,9 +96,9 @@ def divide(instruction, PC):
 	reg1 = instruction[10:13]
 	reg2 = instruction[13:]
 	
-	rf.setRegInt(reg, 15)
+	rf.setRegInt(reg1, 15)
 	rf.setRegInt(reg2,15) #Use this kind of functions to set registers to some value and check your function
-	a = hp.convertReg2int(rf.getReg(reg))
+	a = hp.convertReg2int(rf.getReg(reg1))
 	b = hp.convertReg2int(rf.getReg(reg2))
 	ans  = a / b
 	rem = a%b
