@@ -1,6 +1,7 @@
 import Register_File as rf 
 import Helper as hp
 import Memory as mem
+import matplotlib.pyplot as plt
 
 def add(instruction, PC):
     reg1 = instruction[7: 10]
@@ -318,5 +319,6 @@ def halt(instruction, PC):
 		print(hp.convertIntList2String(register), end =  " ")
 	print()
 	mem.dumpMemory()
+	plt.savefig("Bonus_Question_Plot")
 	exit()
 

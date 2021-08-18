@@ -2,8 +2,9 @@ import Helper as hp
 import Register_File as rf
 import Memory as mem
 import Processing as ps
-
+import matplotlib.pyplot as plt
 PC = 0
+cycle = 0
 
 def inp():
     count = 0
@@ -38,14 +39,28 @@ def refresh(instruction):
         return
     else:
         rf.setRegList("111", [0]*16)
-        
+
+
+
+def SetPlot():
+    plt.xlabel("Cycles")
+    plt.ylabel("Memory Address Accessed")
+    plt.title("Bonus Question")
+
+def BonusPlot(instruction, cycle):
+    plt.scatter(cycle, instruction, c = "blue")
+    
 
 def main():
     inp()
     global PC
+    global cycle
+    SetPlot()
     while True:
         oldPC = PC
+        cycle += 1
         instruction = mem.getMemoryInt(PC)
+        BonusPlot(PC, cycle)
         
         refresh(instruction)
         PC = ps.process(instruction, PC)
