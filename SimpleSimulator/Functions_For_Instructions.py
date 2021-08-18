@@ -275,6 +275,35 @@ def greater_jump(instructions,PC):
 		PC = PC +1
 	return PC
 
+def unconditional_jump(instruction, PC):
+	mem_add = instruction[8:]
+	PC = hp.convertString2int(mem_add)
+	return PC
+
+def equal_jump(instruction, PC):
+	#rf.setRegInt("111",1)
+	mem_add = instruction[8:]
+	mem_add_in_int = hp.convertString2int(mem_add)
+	value_of_equal_flag = rf.getReg("111")[15]
+	if(value_of_equal_flag == 1):
+		PC = mem_add_in_int
+	else:
+		PC = PC + 1
+
+	return PC
+
+def store(instruction, PC):
+	reg = instruction[5:8]
+	mem_add = instruction[8:]
+	rf.setRegInt(reg, 12)
+	reg_val = rf.getReg(reg)
+	bin_rep_reg = hp.convertIntList2String(reg_val)
+	mem.setMemoryBin(mem_add, bin_rep_reg)
+	return (PC + 1)
+
+
+
+
 
 def halt(instruction, PC):
     print(hp.convertBinary8(PC) + " "*8)
@@ -282,3 +311,4 @@ def halt(instruction, PC):
         print(hp.convertIntList2String(register) + " "*8)
     mem.dumpMemory()
     exit()
+
