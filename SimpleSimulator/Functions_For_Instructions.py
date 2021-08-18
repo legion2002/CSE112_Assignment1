@@ -26,7 +26,6 @@ def add(instruction, PC):
     return PC + 1
 
 
-
 def subtraction(instruction, PC):
 	reg1 = instruction[7:10]
 	reg2 = instruction[10:13]
@@ -48,6 +47,7 @@ def subtraction(instruction, PC):
 	
 	return (PC + 1)
 
+
 def move_immediate(instruction, PC):
 	reg1 = instruction[5:8]
 	imm = instruction[8:]
@@ -60,6 +60,7 @@ def move_immediate(instruction, PC):
 
 	return (PC + 1)
 
+
 def move_register(instruction, PC):
 	reg1 = instruction[10:13]
 	reg2 = instruction[13:]
@@ -69,13 +70,26 @@ def move_register(instruction, PC):
 
 	return (PC + 1)
 
+
+def load(instruction, PC):
+	reg = instruction[5:8]
+	memory = instruction[8:]
+
+	# rf.setRegInt(reg, 12)
+	mem_value = mem.getMemoryBin(memory)
+	value = hp.convertString2int(mem_value)
+	rf.setRegInt(reg, value)
+
+	return PC + 1
+
+
 def multiply(instruction, PC):
     reg1 = instruction[7: 10]
     reg2 = instruction[10: 13]
     reg3 = instruction[13: 16]
  
-    rf.setRegInt(reg2, 15)
-    rf.setRegInt(reg3,15) #Use this kind of functions to set registers to some value and check your function
+    # rf.setRegInt(reg2, 15)
+    # rf.setRegInt(reg3,15) #Use this kind of functions to set registers to some value and check your function
 
     a = hp.convertReg2int(rf.getReg(reg2))
     b = hp.convertReg2int(rf.getReg(reg3))
@@ -92,12 +106,13 @@ def multiply(instruction, PC):
     
     return PC + 1
 
+
 def divide(instruction, PC):
-	reg1 = instruction[10:13]
+	reg = instruction[10:13]
 	reg2 = instruction[13:]
 	
-	rf.setRegInt(reg, 15)
-	rf.setRegInt(reg2,15) #Use this kind of functions to set registers to some value and check your function
+	# rf.setRegInt(reg, 15)
+	# rf.setRegInt(reg2,15) #Use this kind of functions to set registers to some value and check your function
 	a = hp.convertReg2int(rf.getReg(reg))
 	b = hp.convertReg2int(rf.getReg(reg2))
 	ans  = a / b
@@ -111,6 +126,7 @@ def divide(instruction, PC):
 	rf.setRegString(reg1, hp.convertBinary16(rem))
 		
 	return PC + 1
+
 
 def right_shift(instruction, PC):
 	reg1 = instruction[5:8]
@@ -138,6 +154,7 @@ def left_shift(instruction, PC):
 	rf.setRegString(reg1, bin_rep)
 
 	return (PC + 1)
+
 
 def Exclusive_or(instruction, PC):
 	reg1 = instruction[7:10]
@@ -199,6 +216,7 @@ def bitwise_and(instruction, PC):
 
 	return (PC + 1)
 
+
 def invert(instruction, PC):
 	reg1 = instruction[10:13]
 	reg2 = instruction[13:]
@@ -214,6 +232,7 @@ def invert(instruction, PC):
 	rf.setRegString(reg1, bin_rep)
 
 	return (PC + 1)
+
 
 def compare(instruction, PC):
 	reg1 = instruction[10:13]
@@ -233,6 +252,28 @@ def compare(instruction, PC):
 		rf.setLower(1)
 	
 	return (PC + 1)
+
+
+def small_jump(instructions,PC):
+	memory = instructions[8:]
+	mem_add = hp.convertString2int(memory)
+	smaller_than_flag = rf.getReg("111")[13]
+	if smaller_than_flag == 1:
+		PC = mem_add
+	else:
+		PC = PC +1
+	return PC
+
+
+def greater_jump(instructions,PC):
+	memory = instructions[8:]
+	mem_add = hp.convertString2int(memory)
+	greater_than_flag = rf.getReg("111")[13]
+	if greater_than_flag == 1:
+		PC = mem_add
+	else:
+		PC = PC +1
+	return PC
 
 
 def halt(instruction, PC):
