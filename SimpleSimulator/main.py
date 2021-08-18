@@ -34,6 +34,8 @@ def refresh(instruction):
     opcode = instruction[0:5]
     if opcode == "10001" or opcode == "10000" or opcode == '10010' :
         return
+    elif opcode == "00011" and instruction[13:16] == "111":
+        return
     else:
         rf.setRegList("111", [0]*16)
         
@@ -42,11 +44,13 @@ def main():
     inp()
     global PC
     while True:
-        
+        oldPC = PC
         instruction = mem.getMemoryInt(PC)
+        
         refresh(instruction)
         PC = ps.process(instruction, PC)
-        output(PC)
+        output(oldPC)
+        #output was here originally
         
         
 main()

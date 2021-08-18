@@ -7,13 +7,13 @@ def setMemoryBin(address : str, value : str):
     assert len(address) == 8, "Invalid memory address"
     assert len(value) == 16, "Invalid memory value"
     addressInt = int(address,2)
-    MEM[addressInt] = list(value)
+    MEM[addressInt] = hp.convertString2IntList(value)
 
 def getMemoryBin(address : str):
     #gets using binary string address and returns value of memory as string
     assert len(address) == 8, "Invalid memory address"
     addressInt = int(address, 2)
-    return str(MEM[addressInt])
+    return hp.convertIntList2String(MEM[address])
 
 def getMemoryInt(address : int):
     #gets using integer address
@@ -24,7 +24,7 @@ def setMemoryInt(address : int, value : str):
    
     assert address < 256, "Invalid memory address"
     
-    MEM[address] = list(value)
+    MEM[address] = hp.convertString2IntList(value)
     
 
 def dumpMemory():

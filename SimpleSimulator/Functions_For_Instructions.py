@@ -7,8 +7,8 @@ def add(instruction, PC):
     reg2 = instruction[10: 13]
     reg3 = instruction[13: 16]
  
-    rf.setRegInt(reg2, 15)
-    rf.setRegInt(reg3,15) #Use this kind of functions to set registers to some value and check your function
+    # rf.setRegInt(reg2, 15)
+    # rf.setRegInt(reg3,15) #Use this kind of functions to set registers to some value and check your function
 
     a = hp.convertReg2int(rf.getReg(reg2))
     b = hp.convertReg2int(rf.getReg(reg3))
@@ -66,7 +66,7 @@ def move_register(instruction, PC):
 
 	reg_value = rf.getReg(reg2)
 	rf.setRegString(reg1, reg_value)
-
+	rf.setRegList("111",[0]*16)
 	return PC + 1
 
 
@@ -85,7 +85,7 @@ def load(instruction, PC):
 def store(instruction, PC):
 	reg = instruction[5:8]
 	mem_add = instruction[8:]
-	rf.setRegInt(reg, 12)
+	# rf.setRegInt(reg, 12)
 	reg_val = rf.getReg(reg)
 	bin_rep_reg = hp.convertIntList2String(reg_val)
 	mem.setMemoryBin(mem_add, bin_rep_reg)
@@ -278,7 +278,9 @@ def small_jump(instructions,PC):
 	if smaller_than_flag == 1:
 		PC = mem_add
 	else:
-		PC = PC +1
+		PC = PC + 1
+		
+	rf.setRegList("111",[0]*16)
 
 	return PC
 
@@ -291,6 +293,7 @@ def greater_jump(instructions,PC):
 		PC = mem_add
 	else:
 		PC = PC +1
+	rf.setRegList("111",[0]*16)
 
 	return PC
 
@@ -304,14 +307,16 @@ def equal_jump(instruction, PC):
 		PC = mem_add_in_int
 	else:
 		PC = PC + 1
+	rf.setRegList("111",[0]*16)
 
 	return PC
 
 
 def halt(instruction, PC):
-    # print(hp.convertBinary8(PC) + " "*8)
-    # for register in rf.Register_Table.values():
-    #     print(hp.convertIntList2String(register) + " "*8)
-    mem.dumpMemory()
-    exit()
+	print(hp.convertBinary8(PC), end = " ")
+	for register in rf.Register_Table.values():
+		print(hp.convertIntList2String(register), end =  " ")
+	print()
+	mem.dumpMemory()
+	exit()
 
