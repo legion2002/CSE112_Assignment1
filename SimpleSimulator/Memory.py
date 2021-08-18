@@ -29,6 +29,6 @@ def setMemoryInt(address : int, value : str):
 
 def dumpMemory():
     for row in MEM:
-        print(str(row))
+        print(hp.convertIntList2String(row))
 
 

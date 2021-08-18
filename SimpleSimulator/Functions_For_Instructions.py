@@ -61,8 +61,8 @@ def move_immediate(instruction, PC):
 	return (PC + 1)
 
 def move_register(instruction, PC):
-	reg1 = instruction[10:14]
-	reg2 = instruction[14:]
+	reg1 = instruction[10:13]
+	reg2 = instruction[13:]
 
 	reg_value = rf.getReg(reg2)
 	rf.setRegString(reg1, reg_value)
@@ -93,8 +93,8 @@ def multiply(instruction, PC):
     return PC + 1
 
 def divide(instruction, PC):
-	reg = instruction[10:14]
-	reg2 = instruction[14:]
+	reg1 = instruction[10:13]
+	reg2 = instruction[13:]
 	
 	rf.setRegInt(reg, 15)
 	rf.setRegInt(reg2,15) #Use this kind of functions to set registers to some value and check your function
@@ -200,8 +200,8 @@ def bitwise_and(instruction, PC):
 	return (PC + 1)
 
 def invert(instruction, PC):
-	reg1 = instruction[10:14]
-	reg2 = instruction[14:]
+	reg1 = instruction[10:13]
+	reg2 = instruction[13:]
 
 	#rf.setRegInt(reg2, 5)
 	#rf.setRegInt(reg3,9)
@@ -216,8 +216,8 @@ def invert(instruction, PC):
 	return (PC + 1)
 
 def compare(instruction, PC):
-	reg1 = instruction[10:14]
-	reg2 = instruction[14:]
+	reg1 = instruction[10:13]
+	reg2 = instruction[13:]
 
 	#rf.setRegInt(reg2, 5)
 	#rf.setRegInt(reg3,9)
@@ -233,6 +233,7 @@ def compare(instruction, PC):
 		rf.setLower(1)
 	
 	return (PC + 1)
+
 
 def unconditional_jump(instruction, PC):
 	mem_add = instruction[8:]
@@ -261,4 +262,13 @@ def store(instruction, PC):
 	return (PC + 1)
 
 
+
+
+
+def halt(instruction, PC):
+    print(hp.convertBinary8(PC) + " "*8)
+    for register in rf.Register_Table.values():
+        print(hp.convertIntList2String(register) + " "*8)
+    mem.dumpMemory()
+    exit()
 

@@ -22,11 +22,13 @@ def inp():
     
         
 def output(PC):
+    # print("hello")
         
-    print(hp.convertBinary8(PC) , end = " "*8)
+    print(hp.convertBinary8(PC) , end = " ")
     for register in rf.Register_Table.values():
-        print(hp.convertIntList2String(register) , end = " "*8)
+        print(hp.convertIntList2String(register) , end = " ")
     print()
+    
 
 def refresh(instruction):
     opcode = instruction[0:5]
