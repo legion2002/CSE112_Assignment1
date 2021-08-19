@@ -4,7 +4,7 @@ import Memory as mem
 import Processing as ps
 import matplotlib.pyplot as plt
 PC = 0
-cycle = 0
+cycle = -1
 
 def inp():
     count = 0
@@ -63,7 +63,7 @@ def main():
         BonusPlot(PC, cycle)
         
         refresh(instruction)
-        PC = ps.process(instruction, PC)
+        PC = ps.process(instruction, PC, cycle)
         output(oldPC)
         #output was here originally
         

@@ -71,11 +71,12 @@ def move_register(instruction, PC):
 	return PC + 1
 
 
-def load(instruction, PC):
+def load(instruction, PC, cycle):
 	reg = instruction[5:8]
 	memory = instruction[8:]
 
 	# rf.setRegInt(reg, 12)
+	plt.scatter(cycle, hp.convertString2int(memory), c = "blue")
 	mem_value = mem.getMemoryBin(memory)
 	value = hp.convertString2int(mem_value)
 	rf.setRegInt(reg, value)
@@ -83,9 +84,10 @@ def load(instruction, PC):
 	return PC + 1
 
 
-def store(instruction, PC):
+def store(instruction, PC, cycle):
 	reg = instruction[5:8]
 	mem_add = instruction[8:]
+	plt.scatter(cycle, hp.convertString2int(mem_add), c = "blue")
 	# rf.setRegInt(reg, 12)
 	reg_val = rf.getReg(reg)
 	bin_rep_reg = hp.convertIntList2String(reg_val)

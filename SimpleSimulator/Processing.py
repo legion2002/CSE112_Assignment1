@@ -3,7 +3,7 @@ import Register_File as rf
 import Helper as hp
 
 
-def process(instruction : str, PC):
+def process(instruction : str, PC, cycle):
     opcode = instruction[0:5]
     if opcode == "00000":
         return f.add(instruction, PC)
@@ -14,9 +14,9 @@ def process(instruction : str, PC):
     elif opcode == "00011":
         return f.move_register(instruction, PC)
     elif opcode == "00100":
-        return f.load(instruction, PC)
+        return f.load(instruction, PC, cycle)
     elif opcode == "00101":
-        return f.store(instruction, PC)
+        return f.store(instruction, PC, cycle)
     elif opcode == "00110":
         return f.multiply(instruction, PC)
     elif opcode == "00111":
