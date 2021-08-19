@@ -1,0 +1,4 @@
+var x
+var y 
+add RO R1 R2
+hlt
