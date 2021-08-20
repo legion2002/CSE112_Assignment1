@@ -13,7 +13,7 @@ def getMemoryBin(address : str):
     #gets using binary string address and returns value of memory as string
     assert len(address) == 8, "Invalid memory address"
     addressInt = int(address, 2)
-    return hp.convertIntList2String(MEM[address])
+    return hp.convertIntList2String(MEM[addressInt])
 
 def getMemoryInt(address : int):
     #gets using integer address
