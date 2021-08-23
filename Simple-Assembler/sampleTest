@@ -1,0 +1,39 @@
+var x
+var y
+var z
+mov R0 $50
+mov R1 $20
+mov R2 $33
+mov R3 $10
+mov R4 $255
+mov R5 $255
+mov R6 $100
+add R0 R4 R5
+sub R1 R3 R2
+mov R6 R5
+ld R0 x
+mul R6 R4 R5
+div R1 R2
+xor R5 R0 R1
+or R4 R6 R2
+and R1 R2 R3
+mov R0 $10
+mov R1 $20
+not R5 R0
+cmp R1 R0
+jmp label1
+mov R0 $40
+mov R1 $20
+cmp R1 R0
+mov R5 $200
+mov R6 $200
+cmp R1 R0
+label1: st R1 y
+jlt label2
+label2: rs R3 $7
+ls R3 $2
+jgt label3
+label3: add R1 R2 R3
+je label4
+label4: mul R2 R3 R4
+hlt

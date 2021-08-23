@@ -4,23 +4,23 @@ import Memory as mem
 import matplotlib.pyplot as plt
 
 def add(instruction, PC):
-    reg1 = instruction[7: 10]
-    reg2 = instruction[10: 13]
-    reg3 = instruction[13: 16]
+	reg1 = instruction[7: 10]
+	reg2 = instruction[10: 13]
+	reg3 = instruction[13: 16]
+	
+	a = hp.convertReg2int(rf.getReg(reg2))
+	b = hp.convertReg2int(rf.getReg(reg3))
     
-    a = hp.convertReg2int(rf.getReg(reg2))
-    b = hp.convertReg2int(rf.getReg(reg3))
-    
-    ans  = a + b
-    ansBin = hp.convertBinary(ans)
-   
-    if len(ansBin) > 16:
-        rf.setOverflow(1)
-        rf.setRegString(reg1, ansBin[len(ansBin) - 16:])
-    else:
-        rf.setRegString(reg1, hp.convertBinary16(ans))
-    
-    return PC + 1
+	ans  = a + b
+	ansBin = hp.convertBinary(ans)
+	
+	if len(ansBin) > 16:
+	    rf.setOverflow(1)
+	    rf.setRegString(reg1, ansBin[len(ansBin) - 16:])
+	else:
+	    rf.setRegString(reg1, hp.convertBinary16(ans))
+	
+	return PC + 1
 
 
 def subtraction(instruction, PC):
@@ -44,7 +44,6 @@ def subtraction(instruction, PC):
 def move_immediate(instruction, PC):
 	reg1 = instruction[5:8]
 	imm = instruction[8:]
-	
 	imm_value_in_int = hp.convertString2int(imm)
 	bin_rep = hp.convertBinary16(imm_value_in_int)
 	rf.setRegString(reg1, bin_rep)
@@ -206,7 +205,7 @@ def bitwise_and(instruction, PC):
 def invert(instruction, PC):
 	reg1 = instruction[10:13]
 	reg2 = instruction[13:]
-
+	
 	value1 = hp.convertReg2int(rf.getReg(reg2))
 	result = ~value1 & (pow(2,16)-1)
 	bin_rep = hp.convertBinary16(result)
@@ -294,4 +293,3 @@ def halt(instruction, PC):
 	mem.dumpMemory()
 	plt.savefig("Bonus_Question_Plot")
 	exit()
-
