@@ -19,6 +19,8 @@ Register_Table  = {
     '110': R6,
     '111': FLAGS,
 }
+
+
 def changeArrayRegister( regCode : str, value):
     global R0
     global R1
@@ -28,8 +30,10 @@ def changeArrayRegister( regCode : str, value):
     global R5
     global R6
     global FLAGS
+
     assert len(value) == 16, "Something wrong with Register File Length"
     # assert type(value) is List, "Something wrong with Register File Type"
+
     if(regCode == '000'):
         R0 = value
         Register_Table[regCode] = R0
@@ -60,15 +64,15 @@ def changeArrayRegister( regCode : str, value):
 
 def getReg(regCode : str):
     assert regCode in Register_Table.keys(), "Registers Invalid"
-    
     return Register_Table[regCode]
+
 
 def setRegList(regCode : str, value):
     #value is an array of length 16
-    
     assert regCode in Register_Table.keys(), "Registers Invalid"
     assert len(value) == 16, "Registers Invalid"
     changeArrayRegister(regCode, value)
+
 
 def setRegString(regCode : str, value : str):
     #value is a string of length 16
@@ -77,39 +81,48 @@ def setRegString(regCode : str, value : str):
     assert len(valueList) == 16, "Registers Invalid"
     changeArrayRegister(regCode, valueList)
 
+
 def setRegInt(regCode : str, value : int):
     #value is an integer
-    
     valueString = hp.convertBinary16(value)
     valueList = hp.convertString2IntList(valueString)
     assert regCode in Register_Table.keys(), "Registers Invalid"
     assert len(valueList) == 16, "Registers Invalid"
     changeArrayRegister(regCode, valueList)
 
+
 def setOverflow(val : int):
     FLAGS[-4] = val
     Register_Table["111"] = FLAGS
+
 
 def setGreater(val : int):
     FLAGS[-2] = val
     Register_Table['111'] = FLAGS
 
+
 def setLower(val : int):
     FLAGS[-3] = val
     Register_Table["111"] = FLAGS
+
 
 def setEqual(val : int):
     FLAGS[-1] = val
     Register_Table["111"] = FLAGS
 
+
 def getOverflow():
     return FLAGS[-4]
+
 
 def getGreater():
     return FLAGS[-2]
 
+
 def getLower():
     return FLAGS[-3]
 
+
 def getEqual():
     return FLAGS[-1]
+

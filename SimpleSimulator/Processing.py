@@ -46,13 +46,3 @@ def process(instruction : str, PC, cycle):
     elif opcode == "10011":
         return f.halt(instruction, PC)
 
-# start completing processing functions here, if your function doesn't update the program counter,
-# add 1 to the program counter once you have processed your instruction
-# basically it is the responsibility of your function to return the value of the correct program counter.
-
-
-# print(process("0000000001010011",5))
-
-
-
-
